@@ -1,8 +1,13 @@
 import React from "react";
-import { Home } from "./Components";
+import { Main } from "./Components";
+import "./App.css";
 
 const App = () => {
-  return <Home />;
+  return (
+    <div className="rootContainer">
+      <Main />
+    </div>
+  );
 };
 
 export default App;

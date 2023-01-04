@@ -20,12 +20,30 @@ const Input = ({
   handleShowPassword,
 }) => {
   return (
-    <Grid item sm={half ? 6 : 12} xs={12}>
-      <Typography mb={1}>{label}</Typography>
+    <Grid item sm={12}>
+      <Typography sx={{ color: " rgba(197, 199, 202, 1)" }}>{label}</Typography>
       <TextField
         name={name}
         onChange={handleChange}
         variant="outlined"
+        sx={{
+          mt: "10px",
+          color: "white",
+          "& .MuiOutlinedInput-root": {
+            "& fieldset": {
+              border: "1.5px solid #35373B",
+            },
+            "&:hover fieldset": {
+              borderColor: "#4A96FF",
+            },
+          },
+          "& .MuiInputBase-input": {
+            color: "rgba(127, 128, 132, 1)",
+          },
+          "& .MuiInputBase-input::placeholder": {
+            color: "white",
+          },
+        }}
         required
         fullWidth
         hiddenLabel
@@ -39,9 +57,13 @@ const Input = ({
                   <InputAdornment position="end">
                     <IconButton onClick={handleShowPassword}>
                       {type === "password" ? (
-                        <VisibilityIcon />
+                        <VisibilityIcon
+                          sx={{ color: "rgba(127, 128, 132, 1)" }}
+                        />
                       ) : (
-                        <VisibilityOffIcon />
+                        <VisibilityOffIcon
+                          sx={{ color: "rgba(127, 128, 132, 1)" }}
+                        />
                       )}
                     </IconButton>
                   </InputAdornment>
