@@ -1,7 +1,5 @@
 .rootContainer {
   background-color: rgba(25, 25, 32, 1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
   height: 100vh;
 }
