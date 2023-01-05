@@ -80,6 +80,7 @@ const Form = ({ handlePostSubmit }) => {
             fullWidth
             variant="standard"
             value={message}
+            autoComplete="off"
             onChange={(e) => setMessage(e.target.value)}
             placeholder="How are you feeling today?"
             sx={{

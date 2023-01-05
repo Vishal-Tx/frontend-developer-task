@@ -12,7 +12,6 @@ const Post = ({ ...post }) => {
         mt: "16px",
         backgroundColor: "rgba(39, 41, 45, 1)",
         maxWidth: "700px",
-        maxHeight: "223px",
         borderRadius: "8px",
       }}
     >
@@ -49,7 +48,6 @@ const Post = ({ ...post }) => {
           padding: "15px 16px",
           backgroundColor: "rgba(25, 25, 32, 1)",
           maxWidth: "660px",
-          maxHeight: "78px",
           borderRadius: "8px",
           marginTop: "18px",
           display: "flex",
