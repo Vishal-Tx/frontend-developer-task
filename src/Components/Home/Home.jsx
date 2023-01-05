@@ -4,6 +4,7 @@ import Post from "../Post/Post";
 import Form from "./Form/Form";
 import data from "./data";
 import useLocalStorage from "../../Hooks/useLocalStorage";
+import AuthModal from "../AuthModal/AuthModal";
 const Home = () => {
   // const [posts, setPosts] = useState(data);
   const [storedPosts, setStoredPosts] = useLocalStorage("posts", data);
@@ -16,46 +17,49 @@ const Home = () => {
   };
 
   return (
-    <Container
-      sx={{
-        color: "rgba(197, 199, 202, 1)",
-        width: "max-content",
-        mb: "24px",
-      }}
-    >
-      <Typography
+    <>
+      <AuthModal />
+      <Container
         sx={{
-          fontSize: "28px",
-          lineHeight: "34px",
-          marginTop: "15px",
-          display: "inline-block",
+          color: "rgba(197, 199, 202, 1)",
+          width: "max-content",
+          mb: "24px",
         }}
       >
-        Hello Jane
-      </Typography>
-      <Typography
-        sx={{
-          maxWidth: "580px",
-          mt: "12px",
-          color: "rgba(127, 128, 132, 1)",
-          fontSize: "16px",
-          LineHeight: "24px",
-          aligh: "left",
-          verticalAlign: "top",
-        }}
-      >
-        How are you doing today? Would you like to share something with the
-        community 🤗
-      </Typography>
+        <Typography
+          sx={{
+            fontSize: "28px",
+            lineHeight: "34px",
+            marginTop: "15px",
+            display: "inline-block",
+          }}
+        >
+          Hello Jane
+        </Typography>
+        <Typography
+          sx={{
+            maxWidth: "580px",
+            mt: "12px",
+            color: "rgba(127, 128, 132, 1)",
+            fontSize: "16px",
+            LineHeight: "24px",
+            aligh: "left",
+            verticalAlign: "top",
+          }}
+        >
+          How are you doing today? Would you like to share something with the
+          community 🤗
+        </Typography>
 
-      <Form handlePostSubmit={handlePostSubmit} />
-      {storedPosts
-        .slice(0)
-        .reverse()
-        .map((post, index) => {
-          return <Post key={index} {...post} />;
-        })}
-    </Container>
+        <Form handlePostSubmit={handlePostSubmit} />
+        {storedPosts
+          .slice(0)
+          .reverse()
+          .map((post, index) => {
+            return <Post key={index} {...post} />;
+          })}
+      </Container>
+    </>
   );
 };
 

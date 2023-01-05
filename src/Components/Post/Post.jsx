@@ -3,7 +3,6 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import React from "react";
 
 const Post = ({ ...post }) => {
-  console.log("post", post);
   return (
     <Box
       sx={{
