@@ -13,11 +13,22 @@ import React, { useState } from "react";
 import messageLogo from "../../assets/message.png";
 import helloLogo from "../../assets/hello.png";
 import sadLogo from "../../assets/sad.png";
+import EmojiPicker, { Emoji } from "emoji-picker-react";
 const Home = () => {
   const [age, setAge] = useState(messageLogo);
+  const [isVisible, setIsVisible] = useState(false);
+  const [emojiId, setEmojiId] = useState("1f4ac");
+  const [message, setMessage] = useState("");
 
   const handleChange = (event) => {
     setAge(event.target.value);
+  };
+  const handleVisible = () => {
+    setIsVisible((prevValue) => !prevValue);
+  };
+
+  const handlePostSubmit = () => {
+    console.log(message, emojiId);
   };
   return (
     <Container sx={{ color: "rgba(197, 199, 202, 1)" }}>
@@ -68,8 +79,30 @@ const Home = () => {
             alignItems: "center",
           }}
         >
-          {" "}
-          <Select
+          <Button
+            onClick={handleVisible}
+            sx={{
+              backgroundColor: "rgba(39, 41, 45, 1)",
+              "&. css-15cvrn0-MuiButtonBase-root-MuiButton-root": {
+                minWidth: 0,
+              },
+              minWidth: "48px",
+              height: "48px",
+              borderRadius: "50%",
+              padding: 0,
+            }}
+          >
+            <Emoji unified={emojiId} size="25" />
+          </Button>
+          {isVisible && (
+            <EmojiPicker
+              onEmojiClick={(emojiData) => {
+                setIsVisible(false), console.log(emojiData);
+                setEmojiId(emojiData.unified);
+              }}
+            />
+          )}
+          {/* <Select
             value={age}
             label="Age"
             onChange={handleChange}
@@ -104,11 +137,12 @@ const Home = () => {
                 style={{ width: "18px", height: "18xp" }}
               ></img>
             </MenuItem>
-          </Select>
+          </Select> */}
           <TextField
             fullWidth
-            id="outlined-basic"
             variant="standard"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             placeholder="How are you feeling today?"
             sx={{
               ml: "16px",
@@ -129,6 +163,7 @@ const Home = () => {
               width: "111px",
               height: "43px",
             }}
+            onClick={handlePostSubmit}
           >
             Post
           </Button>
