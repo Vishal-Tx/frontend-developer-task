@@ -28,6 +28,7 @@ const Form = ({ handlePostSubmit, currentUser, setOpen }) => {
       });
     } else {
       handlePostSubmit(message, emoji);
+      setMessage("");
     }
   };
   return (

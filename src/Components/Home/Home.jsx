@@ -1,22 +1,48 @@
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Post from "../Post/Post";
 import Form from "./Form/Form";
-import data from "./data";
+import data from "../../assets/data";
 import useLocalStorage from "../../Hooks/useLocalStorage";
 import AuthModal from "../AuthModal/AuthModal";
+import * as dayjs from "dayjs";
+import { nanoid } from "nanoid";
+import postContext from "../../context";
 const Home = () => {
   // const [posts, setPosts] = useState(data);
-  const [storedPosts, setStoredPosts] = useLocalStorage("posts", data);
-  const [allUsers, setAllUsers] = useLocalStorage("allUsers", []);
-  const [currentUser, setCurrentUser] = useLocalStorage("currentUser", null);
+  const {
+    storedPosts,
+    setStoredPosts,
+    allUsers,
+    setAllUsers,
+    currentUser,
+    setCurrentUser,
+  } = useContext(postContext);
+  // const [storedPosts, setStoredPosts] = useLocalStorage("posts", data);
+  // const [allUsers, setAllUsers] = useLocalStorage("allUsers", []);
+  // const [currentUser, setCurrentUser] = useLocalStorage("currentUser", null);
   const [open, setOpen] = useState(false);
 
   const handlePostSubmit = (message, emoji) => {
     console.log(message, emoji);
-    const post = { name: "sd", time: "2023", message, emoji };
+    const post = {
+      id: nanoid(),
+      name: currentUser.username,
+      time: dayjs().format(),
+      message,
+      emoji,
+      creator: {
+        creatorEmail: currentUser.email,
+        creatorUserName: currentUser.username,
+      },
+    };
 
     setStoredPosts([...storedPosts, post]);
+  };
+  const handlePostDelete = async (id) => {
+    const updatedPosts = storedPosts.filter((post) => post?.id !== id);
+    console.log("updatedPosts", updatedPosts);
+    setStoredPosts(updatedPosts);
   };
 
   return (
@@ -43,7 +69,7 @@ const Home = () => {
             display: "inline-block",
           }}
         >
-          Hello Jane
+          Hello {currentUser ? currentUser.username : "there.."}
         </Typography>
         <Typography
           sx={{
@@ -69,7 +95,14 @@ const Home = () => {
           .slice(0)
           .reverse()
           .map((post, index) => {
-            return <Post key={index} {...post} />;
+            return (
+              <Post
+                key={index}
+                {...post}
+                currentUser={currentUser}
+                handlePostDelete={handlePostDelete}
+              />
+            );
           })}
       </Container>
     </>

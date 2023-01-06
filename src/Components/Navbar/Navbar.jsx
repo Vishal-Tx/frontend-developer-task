@@ -13,10 +13,22 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { Link } from "react-router-dom";
 import "./style.css";
+import { Button } from "@mui/material";
+import postContext from "../../context";
 
 export default function Navbar() {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const {
+    storedPosts,
+    setStoredPosts,
+    allUsers,
+    setAllUsers,
+    currentUser,
+    setCurrentUser,
+    logoutUser,
+  } = React.useContext(postContext);
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -54,6 +66,9 @@ export default function Navbar() {
               <Link className="nav-link" to="/auth">
                 SignIn{" "}
               </Link>
+              {currentUser && (
+                <Button onClick={() => logoutUser()}>Logout</Button>
+              )}
               <div>
                 <IconButton
                   size="large"

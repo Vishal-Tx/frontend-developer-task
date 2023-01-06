@@ -7,27 +7,30 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import { PostProvider } from "./context";
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Navigate to="/posts" />} />
+    <PostProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Navigate to="/posts" />} />
 
-          <Route path="posts">
-            <Route index exact element={<Home />} />
+            <Route path="posts">
+              <Route index exact element={<Home />} />
+            </Route>
+
+            <Route
+              path="/auth"
+              exact
+              // element={!user ? <Auth /> : <Navigate to="/posts" />}
+              element={<Auth />}
+            />
           </Route>
-
-          <Route
-            path="/auth"
-            exact
-            // element={!user ? <Auth /> : <Navigate to="/posts" />}
-            element={<Auth />}
-          />
-        </Route>
-      </Routes>
-    </Router>
+        </Routes>
+      </Router>
+    </PostProvider>
   );
 };
 

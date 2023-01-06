@@ -16,7 +16,9 @@ const AuthForm = ({ allUsers, setAllUser, setCurrentUser }) => {
     e.preventDefault();
     const { username, email, password } = formData;
     if (isSignUp) {
-      const existingUser = allUsers.filter((user) => user.email === email);
+      const existingUser = allUsers.filter(
+        (user) => user.email === email && user.username === username
+      );
       console.log("existingUser", existingUser);
       if (existingUser.length) {
         toast("user already exists", {
@@ -28,7 +30,28 @@ const AuthForm = ({ allUsers, setAllUser, setCurrentUser }) => {
       const user = { username, email, password: hashedPassword };
       setAllUser([...allUsers, user]);
       setCurrentUser(user);
-      console.log(user);
+      console.log("isSignUpUSer", user);
+    } else {
+      const { email, password } = formData;
+
+      const existingUser = allUsers.filter(
+        (user) => user.email === email || user.username === email
+      );
+      if (existingUser.length) {
+        console.log("existing user", existingUser[0]);
+        const isPasswordCorrect = await bcrypt.compare(
+          password,
+          existingUser[0].password
+        );
+        if (!isPasswordCorrect) {
+          toast.error("Invalid Crediantials!");
+        } else {
+          setCurrentUser(existingUser[0]);
+          toast.success("Login Success");
+        }
+      } else {
+        toast.error("Try Again!");
+      }
     }
   };
   const handleChange = (e) => {
