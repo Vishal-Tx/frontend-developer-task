@@ -1,5 +1,5 @@
 import React from "react";
-import { Auth, Home, Layout, Main } from "./Components";
+import { Auth, Home, Layout } from "./Components";
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -32,12 +32,7 @@ const App = () => {
               <Route index exact element={<Home />} />
             </Route>
 
-            <Route
-              path="/auth"
-              exact
-              // element={!user ? <Auth /> : <Navigate to="/posts" />}
-              element={<Auth />}
-            />
+            <Route path="/auth" exact element={<Auth />} />
           </Route>
         </Routes>
       </Router>

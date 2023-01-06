@@ -1,18 +1,13 @@
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import { Container, Typography } from "@mui/material";
+import React, { useContext, useState } from "react";
 import Post from "../Post/Post";
 import Form from "./Form/Form";
-import data from "../../assets/data";
-import useLocalStorage from "../../Hooks/useLocalStorage";
 import AuthModal from "../AuthModal/AuthModal";
 
 import postContext from "../../context";
 const Home = () => {
-  // const [posts, setPosts] = useState(data);
   const { storedPosts, currentUser } = useContext(postContext);
   const [open, setOpen] = useState(false);
-
-  console.log("effect");
 
   return (
     <>
@@ -20,7 +15,7 @@ const Home = () => {
       <Container
         sx={{
           color: "rgba(197, 199, 202, 1)",
-          width: "max-content",
+          maxWidth: "780px !important",
           mb: "24px",
         }}
       >

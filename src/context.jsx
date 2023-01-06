@@ -31,6 +31,7 @@ export const PostProvider = ({ children }) => {
         creatorEmail: currentUser.email,
         creatorUserName: currentUser.username,
       },
+      isEdited: false,
     };
     setStoredPosts([...storedPosts, post]);
   };

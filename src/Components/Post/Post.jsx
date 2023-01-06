@@ -1,23 +1,15 @@
-import { Avatar, Box, Button, Menu, MenuItem, Typography } from "@mui/material";
+import { Box, Button, Menu, MenuItem, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import React, { useContext, useState } from "react";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import postContext from "../../context";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 dayjs.extend(relativeTime);
 const Post = ({ ...post }) => {
-  const {
-    storedPosts,
-    setStoredPosts,
-    allUsers,
-    setAllUsers,
-    currentUser,
-    setCurrentUser,
-    handlePostDelete,
-  } = useContext(postContext);
+  const { currentUser, handlePostDelete } = useContext(postContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -73,6 +65,7 @@ const Post = ({ ...post }) => {
               }}
             >
               {dayjs(post.time).fromNow()}
+              {post.isEdited ? " • Edited" : null}
             </Typography>
           </Box>
         </Box>

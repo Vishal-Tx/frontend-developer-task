@@ -13,14 +13,13 @@ const Input = ({
   name,
   label,
   placeholder,
-  half,
   handleChange,
   type,
   autoFocus,
   handleShowPassword,
 }) => {
   return (
-    <Grid item sm={12}>
+    <Grid item xs={12}>
       <Typography sx={{ color: " rgba(197, 199, 202, 1)" }}>{label}</Typography>
       <TextField
         name={name}

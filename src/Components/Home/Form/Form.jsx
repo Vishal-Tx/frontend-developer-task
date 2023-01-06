@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import postContext from "../../../context";
 
 const Form = ({ setOpen }) => {
