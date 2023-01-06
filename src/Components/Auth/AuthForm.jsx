@@ -14,6 +14,7 @@ const AuthForm = () => {
     username: "",
     email: "",
     password: "",
+    nameorEmail: "",
   });
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
@@ -21,7 +22,7 @@ const AuthForm = () => {
     const { username, email, password } = formData;
     if (isSignUp) {
       const existingUser = allUsers.filter(
-        (user) => user.email === email && user.username === username
+        (user) => user.email === email || user.username === username
       );
       console.log("existingUser", existingUser);
       if (existingUser.length) {
@@ -34,13 +35,14 @@ const AuthForm = () => {
       const user = { username, email, password: hashedPassword };
       setAllUsers([...allUsers, user]);
       setCurrentUser(user);
+      toast.success(`Welcome ${user.username}`);
       console.log("isSignUpUSer", user);
       navigate("/");
     } else {
-      const { email, password } = formData;
+      const { nameorEmail, password } = formData;
 
       const existingUser = allUsers.filter(
-        (user) => user.email === email || user.username === email
+        (user) => user.email === nameorEmail || user.username === nameorEmail
       );
       if (existingUser.length) {
         const isVerified = password !== decode(existingUser[0].password);
@@ -105,22 +107,30 @@ const AuthForm = () => {
       </Typography>
       <form style={{ marginTop: "45px" }} onSubmit={handleSubmit}>
         <Grid container spacing={2}>
-          <Input
-            name="email"
-            label={isSignUp ? "Email" : "Email or Username"}
-            handleChange={handleChange}
-            type="email"
-            placeholder={
-              isSignUp ? "Enter your email" : "Enter your email or username"
-            }
-          />
-          {isSignUp && (
+          {!isSignUp && (
             <Input
-              name="username"
-              label="Username"
+              name="nameorEmail"
+              label="Email or Username"
               handleChange={handleChange}
-              placeholder="Choose a preferred username"
+              placeholder="Enter your email or username"
             />
+          )}
+          {isSignUp && (
+            <>
+              <Input
+                name="email"
+                label={isSignUp ? "Email" : "Email or Username"}
+                handleChange={handleChange}
+                type="email"
+                placeholder="Enter your email"
+              />
+              <Input
+                name="username"
+                label="Username"
+                handleChange={handleChange}
+                placeholder="Choose a preferred username"
+              />
+            </>
           )}
           <Input
             name="password"
