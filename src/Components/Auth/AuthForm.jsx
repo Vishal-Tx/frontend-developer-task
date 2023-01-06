@@ -2,18 +2,34 @@ import { Button, Grid, Paper, Typography } from "@mui/material";
 import React, { useState } from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Input from "./Input";
-const AuthForm = () => {
+import bcrypt from "bcryptjs";
+import { toast } from "react-hot-toast";
+const AuthForm = ({ allUsers, setAllUser, setCurrentUser }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    username: "",
     email: "",
     password: "",
-    confirmPassword: "",
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const { username, email, password } = formData;
+    if (isSignUp) {
+      const existingUser = allUsers.filter((user) => user.email === email);
+      console.log("existingUser", existingUser);
+      if (existingUser.length) {
+        toast("user already exists", {
+          icon: "😔",
+        });
+        return;
+      }
+      const hashedPassword = await bcrypt.hash(password, 12);
+      const user = { username, email, password: hashedPassword };
+      setAllUser([...allUsers, user]);
+      setCurrentUser(user);
+      console.log(user);
+    }
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -74,7 +90,7 @@ const AuthForm = () => {
           />
           {isSignUp && (
             <Input
-              name="Username"
+              name="username"
               label="Username"
               handleChange={handleChange}
               placeholder="Choose a preferred username"

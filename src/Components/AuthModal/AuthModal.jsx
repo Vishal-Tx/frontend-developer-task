@@ -17,14 +17,16 @@ const style = {
   p: 4,
 };
 
-export default function AuthModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+export default function AuthModal({
+  open,
+  setOpen,
+  allUsers,
+  setAllUser,
+  setCurrentUser,
+}) {
   const handleClose = () => setOpen(false);
-
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -39,7 +41,11 @@ export default function AuthModal() {
       >
         <Box sx={{ maxWidth: "463px" }}>
           {" "}
-          <AuthForm />
+          <AuthForm
+            allUsers={allUsers}
+            setAllUser={setAllUser}
+            setCurrentUser={setCurrentUser}
+          />
         </Box>
       </Modal>
     </div>

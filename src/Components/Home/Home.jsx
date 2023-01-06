@@ -8,6 +8,9 @@ import AuthModal from "../AuthModal/AuthModal";
 const Home = () => {
   // const [posts, setPosts] = useState(data);
   const [storedPosts, setStoredPosts] = useLocalStorage("posts", data);
+  const [allUsers, setAllUsers] = useLocalStorage("allUsers", []);
+  const [currentUser, setCurrentUser] = useLocalStorage("currentUser", null);
+  const [open, setOpen] = useState(false);
 
   const handlePostSubmit = (message, emoji) => {
     console.log(message, emoji);
@@ -18,7 +21,13 @@ const Home = () => {
 
   return (
     <>
-      <AuthModal />
+      <AuthModal
+        open={open}
+        setOpen={setOpen}
+        allUsers={allUsers}
+        setAllUser={setAllUsers}
+        setCurrentUser={setCurrentUser}
+      />
       <Container
         sx={{
           color: "rgba(197, 199, 202, 1)",
@@ -51,7 +60,11 @@ const Home = () => {
           community 🤗
         </Typography>
 
-        <Form handlePostSubmit={handlePostSubmit} />
+        <Form
+          handlePostSubmit={handlePostSubmit}
+          currentUser={currentUser}
+          setOpen={setOpen}
+        />
         {storedPosts
           .slice(0)
           .reverse()
