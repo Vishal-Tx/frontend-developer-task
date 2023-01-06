@@ -1,9 +1,9 @@
 .nav-link:hover {
-  text-decoration: underline white 3px;
+  color: hsl(0, 0%, 70%);
 }
 .nav-link {
   text-decoration: none;
-  color: white;
+  color: hsl(0, 0%, 100%);
   margin: 0 10px;
   font-size: 20px;
 }

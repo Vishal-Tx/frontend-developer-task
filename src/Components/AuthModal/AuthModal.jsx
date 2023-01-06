@@ -17,13 +17,7 @@ const style = {
   p: 4,
 };
 
-export default function AuthModal({
-  open,
-  setOpen,
-  allUsers,
-  setAllUser,
-  setCurrentUser,
-}) {
+export default function AuthModal({ open, setOpen }) {
   const handleClose = () => setOpen(false);
   return (
     <div>
@@ -41,11 +35,7 @@ export default function AuthModal({
       >
         <Box sx={{ maxWidth: "463px" }}>
           {" "}
-          <AuthForm
-            allUsers={allUsers}
-            setAllUser={setAllUser}
-            setCurrentUser={setCurrentUser}
-          />
+          <AuthForm />
         </Box>
       </Modal>
     </div>

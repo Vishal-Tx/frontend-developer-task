@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import toast, { Toaster } from "react-hot-toast";
+import postContext from "../../../context";
 
-const Form = ({ handlePostSubmit, currentUser, setOpen }) => {
+const Form = ({ setOpen }) => {
+  const { createPost, currentUser } = useContext(postContext);
   const [emoji, setEmoji] = useState("💬");
   const [message, setMessage] = useState("");
   const [isVisible, setIsVisible] = useState(false);
@@ -17,17 +19,13 @@ const Form = ({ handlePostSubmit, currentUser, setOpen }) => {
     e.preventDefault();
     if (!currentUser) {
       setOpen(true);
-      toast("Login first to Post.", {
-        icon: "👏",
-        duration: 2000,
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-        },
-      });
+      toast("Login first to Post.", { icon: "👏" });
     } else {
-      handlePostSubmit(message, emoji);
+      if (message.trim().length === 0) {
+        toast("Post cannot be empty.", { icon: "⚠️" });
+        return;
+      }
+      createPost(message, emoji);
       setMessage("");
     }
   };
@@ -43,7 +41,6 @@ const Form = ({ handlePostSubmit, currentUser, setOpen }) => {
         borderRadius: "8px",
       }}
     >
-      <Toaster />
       <Typography sx={{ color: "rgba(197, 199, 202, 1)" }}>
         Create Post
       </Typography>

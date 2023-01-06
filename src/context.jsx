@@ -1,6 +1,8 @@
 import { createContext } from "react";
 import data from "./assets/data";
 import useLocalStorage from "./Hooks/useLocalStorage";
+import * as dayjs from "dayjs";
+import { nanoid } from "nanoid";
 
 const postContext = createContext();
 
@@ -11,6 +13,26 @@ export const PostProvider = ({ children }) => {
 
   const logoutUser = () => {
     setCurrentUser(null);
+  };
+  const handlePostDelete = async (id) => {
+    const updatedPosts = storedPosts.filter((post) => post?.id !== id);
+    console.log("updatedPosts", updatedPosts);
+    setStoredPosts(updatedPosts);
+  };
+
+  const createPost = (message, emoji) => {
+    const post = {
+      id: nanoid(),
+      name: currentUser.username,
+      time: dayjs().format(),
+      message,
+      emoji,
+      creator: {
+        creatorEmail: currentUser.email,
+        creatorUserName: currentUser.username,
+      },
+    };
+    setStoredPosts([...storedPosts, post]);
   };
 
   return (
@@ -23,6 +45,8 @@ export const PostProvider = ({ children }) => {
         currentUser,
         setCurrentUser,
         logoutUser,
+        handlePostDelete,
+        createPost,
       }}
     >
       {children}

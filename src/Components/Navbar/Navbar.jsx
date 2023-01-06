@@ -15,46 +15,18 @@ import { Link } from "react-router-dom";
 import "./style.css";
 import { Button } from "@mui/material";
 import postContext from "../../context";
+import { toast } from "react-hot-toast";
 
 export default function Navbar() {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const {
-    storedPosts,
-    setStoredPosts,
-    allUsers,
-    setAllUsers,
-    currentUser,
-    setCurrentUser,
-    logoutUser,
-  } = React.useContext(postContext);
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const { currentUser, logoutUser } = React.useContext(postContext);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{}}>
       <AppBar position="static" sx={{ backgroundColor: "#191945" }}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Photos
           </Typography>
@@ -63,42 +35,27 @@ export default function Navbar() {
               <Link className="nav-link" to="/">
                 Home
               </Link>
-              <Link className="nav-link" to="/auth">
-                SignIn{" "}
-              </Link>
-              {currentUser && (
-                <Button onClick={() => logoutUser()}>Logout</Button>
+              {!currentUser && (
+                <Link className="nav-link" to="/auth">
+                  SignIn{" "}
+                </Link>
               )}
-              <div>
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleMenu}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
+              {currentUser && (
+                <Button
+                  sx={{
+                    backgroundColor: "hsl(0, 0%, 100%)",
+                    "&:hover": { backgroundColor: "hsl(0, 0%, 70%)" },
                   }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
+                  onClick={() => {
+                    logoutUser(),
+                      toast("Bye!", {
+                        icon: "👋",
+                      });
                   }}
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
                 >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                </Menu>
-              </div>
+                  Logout
+                </Button>
+              )}
             </>
           )}
         </Toolbar>

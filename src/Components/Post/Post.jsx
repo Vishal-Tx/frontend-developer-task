@@ -1,13 +1,23 @@
 import { Avatar, Box, Button, Menu, MenuItem, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import postContext from "../../context";
 dayjs.extend(relativeTime);
-const Post = ({ currentUser, handlePostDelete, ...post }) => {
+const Post = ({ ...post }) => {
+  const {
+    storedPosts,
+    setStoredPosts,
+    allUsers,
+    setAllUsers,
+    currentUser,
+    setCurrentUser,
+    handlePostDelete,
+  } = useContext(postContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {

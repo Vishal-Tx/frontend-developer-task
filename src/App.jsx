@@ -8,10 +8,21 @@ import {
   Navigate,
 } from "react-router-dom";
 import { PostProvider } from "./context";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
     <PostProvider>
+      <Toaster
+        toastOptions={{
+          duration: 2000,
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        }}
+      />
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>

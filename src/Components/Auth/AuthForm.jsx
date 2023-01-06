@@ -1,10 +1,14 @@
 import { Button, Grid, Paper, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Input from "./Input";
 import bcrypt from "bcryptjs";
 import { toast } from "react-hot-toast";
-const AuthForm = ({ allUsers, setAllUser, setCurrentUser }) => {
+import postContext from "../../context";
+import { useNavigate } from "react-router-dom";
+const AuthForm = () => {
+  const { allUsers, setAllUsers, setCurrentUser, currentUser } =
+    useContext(postContext);
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const [formData, setFormData] = useState({
@@ -12,6 +16,7 @@ const AuthForm = ({ allUsers, setAllUser, setCurrentUser }) => {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { username, email, password } = formData;
@@ -23,14 +28,21 @@ const AuthForm = ({ allUsers, setAllUser, setCurrentUser }) => {
       if (existingUser.length) {
         toast("user already exists", {
           icon: "😔",
+          duration: 2000,
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
         });
         return;
       }
       const hashedPassword = await bcrypt.hash(password, 12);
       const user = { username, email, password: hashedPassword };
-      setAllUser([...allUsers, user]);
+      setAllUsers([...allUsers, user]);
       setCurrentUser(user);
       console.log("isSignUpUSer", user);
+      navigate("/");
     } else {
       const { email, password } = formData;
 
@@ -44,13 +56,35 @@ const AuthForm = ({ allUsers, setAllUser, setCurrentUser }) => {
           existingUser[0].password
         );
         if (!isPasswordCorrect) {
-          toast.error("Invalid Crediantials!");
+          toast.error("Invalid Crediantials!", {
+            duration: 2000,
+            style: {
+              borderRadius: "10px",
+              background: "#333",
+              color: "#fff",
+            },
+          });
         } else {
           setCurrentUser(existingUser[0]);
-          toast.success("Login Success");
+          toast.success(`Welcome ${existingUser[0].username}`, {
+            duration: 2000,
+            style: {
+              borderRadius: "10px",
+              background: "#333",
+              color: "#fff",
+            },
+          });
+          navigate("/");
         }
       } else {
-        toast.error("Try Again!");
+        toast.error("Try Again!", {
+          duration: 2000,
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
       }
     }
   };
