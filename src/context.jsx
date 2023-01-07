@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import data from "./assets/data";
+import data, { userData } from "./assets/data";
 import useLocalStorage from "./Hooks/useLocalStorage";
 import dayjs from "dayjs/esm/index.js";
 import { nanoid } from "nanoid";
@@ -8,7 +8,7 @@ const postContext = createContext();
 
 export const PostProvider = ({ children }) => {
   const [storedPosts, setStoredPosts] = useLocalStorage("posts", data);
-  const [allUsers, setAllUsers] = useLocalStorage("allUsers", []);
+  const [allUsers, setAllUsers] = useLocalStorage("allUsers", userData);
   const [currentUser, setCurrentUser] = useLocalStorage("currentUser", null);
 
   const logoutUser = () => {
@@ -16,7 +16,7 @@ export const PostProvider = ({ children }) => {
   };
   const handlePostDelete = async (id) => {
     const updatedPosts = storedPosts.filter((post) => post?.id !== id);
-    console.log("updatedPosts", updatedPosts);
+
     setStoredPosts(updatedPosts);
   };
 

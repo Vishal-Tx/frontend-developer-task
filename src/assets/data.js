@@ -19,4 +19,11 @@ const data = [
   },
 ];
 
+export const userData = [
+  {
+    username: "Now&Me",
+    email: "test@user",
+    password: "1234",
+  },
+];
 export default data;

@@ -1,4 +1,4 @@
-import { Button, Grid, Paper, Typography } from "@mui/material";
+import { Box, Button, Chip, Grid, Paper, Typography } from "@mui/material";
 import React, { useContext, useState } from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Input from "./Input";
@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 import postContext from "../../context";
 import { useNavigate } from "react-router-dom";
 import { encode, decode } from "js-base64";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 const AuthForm = () => {
   const { allUsers, setAllUsers, setCurrentUser } = useContext(postContext);
   const [showPassword, setShowPassword] = useState(false);
@@ -24,19 +25,18 @@ const AuthForm = () => {
       const existingUser = allUsers.filter(
         (user) => user.email === email || user.username === username
       );
-      console.log("existingUser", existingUser);
       if (existingUser.length) {
         toast("user already exists", {
           icon: "😔",
         });
         return;
       }
+
       const hashedPassword = encode(password);
       const user = { username, email, password: hashedPassword };
       setAllUsers([...allUsers, user]);
       setCurrentUser(user);
       toast.success(`Welcome ${user.username}`);
-      console.log("isSignUpUSer", user);
       navigate("/");
     } else {
       const { nameorEmail, password } = formData;
@@ -67,6 +67,10 @@ const AuthForm = () => {
   };
   const switchMode = () => {
     setIsSignUp((prevState) => !prevState);
+  };
+  const handleCopy = (field, value) => {
+    navigator.clipboard.writeText(value);
+    toast.success(`${field} copied! `);
   };
   return (
     <Paper
@@ -154,6 +158,50 @@ const AuthForm = () => {
         >
           {isSignUp ? "Continue" : "Login now"}
         </Button>
+        {!isSignUp && (
+          <Box
+            sx={{
+              color: "rgba(197, 199, 202, 1)",
+              my: "10px",
+            }}
+          >
+            <Typography sx={{ mb: "5px", fontSize: "14px" }}>
+              You can use this Test Account:
+            </Typography>
+
+            <Chip
+              label=" username: Now&Me"
+              icon={<ContentCopyIcon sx={{ fontSize: "12px" }} />}
+              onClick={() => handleCopy("username", "Now&Me")}
+              sx={{
+                color: "inherit",
+                border: "1px solid grey",
+                fontSize: "12px",
+              }}
+            />
+            <Chip
+              label="email: test@user"
+              icon={<ContentCopyIcon sx={{ fontSize: "12px" }} />}
+              onClick={() => handleCopy("email", "test@user")}
+              sx={{
+                color: "inherit",
+                border: "1px solid grey",
+                mx: "5px",
+                fontSize: "12px",
+              }}
+            />
+            <Chip
+              label="password: 1234"
+              icon={<ContentCopyIcon sx={{ fontSize: "12px" }} />}
+              onClick={() => handleCopy("password", "1234")}
+              sx={{
+                color: "inherit",
+                border: "1px solid grey",
+                fontSize: "12px",
+              }}
+            />
+          </Box>
+        )}
         <div style={{ display: "flex", justifyContent: "center" }}></div>
         <Grid container justifyContent="flex-start">
           <Grid item>

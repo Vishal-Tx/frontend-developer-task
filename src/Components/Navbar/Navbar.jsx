@@ -21,11 +21,6 @@ export default function Navbar() {
             <Logo />
           </Box>
 
-          {/* <Typography variant="h6" component="div">
-            Photos
-          </Typography> */}
-          {/* <img src={Logo} alt="logo" /> */}
-
           <>
             <Link className="nav-link" to="/">
               Home
