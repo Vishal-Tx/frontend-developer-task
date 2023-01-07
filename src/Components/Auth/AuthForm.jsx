@@ -160,6 +160,7 @@ const AuthForm = () => {
                 color: 'inherit',
                 border: '1px solid grey',
                 fontSize: '12px',
+                my: '5px',
               }}
             />
             <Chip
@@ -169,7 +170,7 @@ const AuthForm = () => {
               sx={{
                 color: 'inherit',
                 border: '1px solid grey',
-                mx: '5px',
+                m: '5px',
                 fontSize: '12px',
               }}
             />
@@ -181,6 +182,7 @@ const AuthForm = () => {
                 color: 'inherit',
                 border: '1px solid grey',
                 fontSize: '12px',
+                my: '5px',
               }}
             />
           </Box>
