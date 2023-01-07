@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import data from "./assets/data";
 import useLocalStorage from "./Hooks/useLocalStorage";
-import * as dayjs from "dayjs";
+import dayjs from "dayjs/esm/index.js";
 import { nanoid } from "nanoid";
 
 const postContext = createContext();

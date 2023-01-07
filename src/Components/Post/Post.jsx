@@ -3,7 +3,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import React, { useContext, useState } from "react";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import DeleteIcon from "@mui/icons-material/Delete";
-import * as dayjs from "dayjs";
+import dayjs from "dayjs/esm/index.js";
 import relativeTime from "dayjs/plugin/relativeTime";
 import postContext from "../../context";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
@@ -64,8 +64,8 @@ const Post = ({ ...post }) => {
                 LineHeight: "17px",
               }}
             >
-              {dayjs(post.time).fromNow()}
-              {post.isEdited ? " • Edited" : null}
+              {dayjs?.(post?.time).fromNow()}
+              {post?.isEdited ? " • Edited" : null}
             </Typography>
           </Box>
         </Box>
