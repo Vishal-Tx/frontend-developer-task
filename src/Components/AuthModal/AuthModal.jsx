@@ -24,7 +24,7 @@ export default function AuthModal({open, setOpen}) {
         }}
       >
         <Fade in={open}>
-          <Box sx={{maxWidth: '463px'}}>
+          <Box sx={{maxWidth: '463px', mt: {xs: '40px', md: 0}}}>
             {' '}
             <Paper
               elevation={3}
