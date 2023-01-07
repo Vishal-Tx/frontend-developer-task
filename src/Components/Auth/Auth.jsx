@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box} from '@mui/material'
+import {Box, Paper} from '@mui/material'
 import Logo from '../../assets/Logo.png'
 import AuthForm from './AuthForm'
 
@@ -16,8 +16,24 @@ const Auth = () => {
         }}
       >
         <img style={{margin: '50px 0 '}} src={Logo} alt="logo.." />
-
-        <AuthForm />
+        <Paper
+          elevation={3}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            padding: '40px 24px',
+            maxWidth: '463px',
+            backgroundColor: '#27292D',
+            color: 'white',
+            borderRadius: '8px',
+            border: '2px solid grey',
+            mb: '50px',
+            mx: {xs: '10px', sm: 0},
+          }}
+        >
+          <AuthForm />
+        </Paper>
       </div>
     </Box>
   )

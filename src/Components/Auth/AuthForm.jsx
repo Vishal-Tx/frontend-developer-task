@@ -73,22 +73,7 @@ const AuthForm = () => {
     toast.success(`${field} copied! `)
   }
   return (
-    <Paper
-      elevation={3}
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: '40px 24px',
-        maxWidth: '463px',
-        backgroundColor: '#27292D',
-        color: 'white',
-        borderRadius: '8px',
-        border: '2px solid grey',
-        mb: '50px',
-        mx: {xs: '10px', sm: 0},
-      }}
-    >
+    <>
       <Typography
         sx={{
           fontWeight: '500',
@@ -223,7 +208,7 @@ const AuthForm = () => {
           </Grid>
         </Grid>
       </form>
-    </Paper>
+    </>
   )
 }
 
