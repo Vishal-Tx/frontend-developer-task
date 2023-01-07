@@ -23,7 +23,7 @@ export const userData = [
   {
     username: 'Now&Me',
     email: 'test@user',
-    password: '1234',
+    password: 'MTIzNA==',
   },
 ]
 export default data
