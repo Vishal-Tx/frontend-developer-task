@@ -1,10 +1,10 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import AuthForm from "../Auth/AuthForm";
+import * as React from 'react'
+import Box from '@mui/material/Box'
+import Modal from '@mui/material/Modal'
+import AuthForm from '../Auth/AuthForm'
 
-export default function AuthModal({ open, setOpen }) {
-  const handleClose = () => setOpen(false);
+export default function AuthModal({open, setOpen}) {
+  const handleClose = () => setOpen(false)
   return (
     <div>
       <Modal
@@ -13,17 +13,17 @@ export default function AuthModal({ open, setOpen }) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          backdropFilter: "blur(3px)",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backdropFilter: 'blur(3px)',
         }}
       >
-        <Box sx={{ maxWidth: "463px" }}>
-          {" "}
+        <Box sx={{maxWidth: '463px'}}>
+          {' '}
           <AuthForm />
         </Box>
       </Modal>
     </div>
-  );
+  )
 }

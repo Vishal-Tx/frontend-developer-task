@@ -1,46 +1,32 @@
-import React from "react";
-import {
-  TextField,
-  Grid,
-  InputAdornment,
-  IconButton,
-  Typography,
-} from "@mui/material";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import React from 'react'
+import {TextField, Grid, InputAdornment, IconButton, Typography} from '@mui/material'
+import VisibilityIcon from '@mui/icons-material/Visibility'
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 
-const Input = ({
-  name,
-  label,
-  placeholder,
-  handleChange,
-  type,
-  autoFocus,
-  handleShowPassword,
-}) => {
+const Input = ({name, label, placeholder, handleChange, type, autoFocus, handleShowPassword}) => {
   return (
     <Grid item xs={12}>
-      <Typography sx={{ color: " rgba(197, 199, 202, 1)" }}>{label}</Typography>
+      <Typography sx={{color: ' rgba(197, 199, 202, 1)'}}>{label}</Typography>
       <TextField
         name={name}
         onChange={handleChange}
         variant="outlined"
         sx={{
-          mt: "10px",
-          color: "white",
-          "& .MuiOutlinedInput-root": {
-            "& fieldset": {
-              border: "1.5px solid #35373B",
+          mt: '10px',
+          color: 'white',
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              border: '1.5px solid #35373B',
             },
-            "&:hover fieldset": {
-              borderColor: "#4A96FF",
+            '&:hover fieldset': {
+              borderColor: '#4A96FF',
             },
           },
-          "& .MuiInputBase-input": {
-            color: "rgba(127, 128, 132, 1)",
+          '& .MuiInputBase-input': {
+            color: 'rgba(127, 128, 132, 1)',
           },
-          "& .MuiInputBase-input::placeholder": {
-            color: "white",
+          '& .MuiInputBase-input::placeholder': {
+            color: 'white',
           },
         }}
         required
@@ -50,19 +36,15 @@ const Input = ({
         type={type}
         placeholder={placeholder}
         InputProps={
-          name === "password"
+          name === 'password'
             ? {
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton onClick={handleShowPassword}>
-                      {type === "password" ? (
-                        <VisibilityIcon
-                          sx={{ color: "rgba(127, 128, 132, 1)" }}
-                        />
+                      {type === 'password' ? (
+                        <VisibilityIcon sx={{color: 'rgba(127, 128, 132, 1)'}} />
                       ) : (
-                        <VisibilityOffIcon
-                          sx={{ color: "rgba(127, 128, 132, 1)" }}
-                        />
+                        <VisibilityOffIcon sx={{color: 'rgba(127, 128, 132, 1)'}} />
                       )}
                     </IconButton>
                   </InputAdornment>
@@ -72,7 +54,7 @@ const Input = ({
         }
       />
     </Grid>
-  );
-};
+  )
+}
 
-export default Input;
+export default Input

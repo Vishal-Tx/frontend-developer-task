@@ -1,24 +1,24 @@
-import { createContext } from "react";
-import data, { userData } from "./assets/data";
-import useLocalStorage from "./Hooks/useLocalStorage";
-import dayjs from "dayjs/esm/index.js";
-import { nanoid } from "nanoid";
+import {createContext} from 'react'
+import data, {userData} from './assets/data'
+import useLocalStorage from './Hooks/useLocalStorage'
+import dayjs from 'dayjs/esm/index.js'
+import {nanoid} from 'nanoid'
 
-const postContext = createContext();
+const postContext = createContext()
 
-export const PostProvider = ({ children }) => {
-  const [storedPosts, setStoredPosts] = useLocalStorage("posts", data);
-  const [allUsers, setAllUsers] = useLocalStorage("allUsers", userData);
-  const [currentUser, setCurrentUser] = useLocalStorage("currentUser", null);
+export const PostProvider = ({children}) => {
+  const [storedPosts, setStoredPosts] = useLocalStorage('posts', data)
+  const [allUsers, setAllUsers] = useLocalStorage('allUsers', userData)
+  const [currentUser, setCurrentUser] = useLocalStorage('currentUser', null)
 
   const logoutUser = () => {
-    setCurrentUser(null);
-  };
-  const handlePostDelete = async (id) => {
-    const updatedPosts = storedPosts.filter((post) => post?.id !== id);
+    setCurrentUser(null)
+  }
+  const handlePostDelete = async id => {
+    const updatedPosts = storedPosts.filter(post => post?.id !== id)
 
-    setStoredPosts(updatedPosts);
-  };
+    setStoredPosts(updatedPosts)
+  }
 
   const createPost = (message, emoji) => {
     const post = {
@@ -32,9 +32,9 @@ export const PostProvider = ({ children }) => {
         creatorUserName: currentUser.username,
       },
       isEdited: false,
-    };
-    setStoredPosts([...storedPosts, post]);
-  };
+    }
+    setStoredPosts([...storedPosts, post])
+  }
 
   return (
     <postContext.Provider
@@ -52,6 +52,6 @@ export const PostProvider = ({ children }) => {
     >
       {children}
     </postContext.Provider>
-  );
-};
-export default postContext;
+  )
+}
+export default postContext

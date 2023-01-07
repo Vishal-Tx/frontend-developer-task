@@ -1,14 +1,9 @@
-import React from "react";
-import { Auth, Home, Layout } from "./Components";
-import "./App.css";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-import { PostProvider } from "./context";
-import { Toaster } from "react-hot-toast";
+import React from 'react'
+import {Auth, Home, Layout} from './Components'
+import './App.css'
+import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
+import {PostProvider} from './context'
+import {Toaster} from 'react-hot-toast'
 
 const App = () => {
   return (
@@ -17,9 +12,9 @@ const App = () => {
         toastOptions={{
           duration: 2000,
           style: {
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
           },
         }}
       />
@@ -37,7 +32,7 @@ const App = () => {
         </Routes>
       </Router>
     </PostProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

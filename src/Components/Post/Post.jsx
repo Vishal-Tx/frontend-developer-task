@@ -1,86 +1,85 @@
-import { Box, Button, Menu, MenuItem, Typography } from "@mui/material";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import React, { useContext, useState } from "react";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import DeleteIcon from "@mui/icons-material/Delete";
-import dayjs from "dayjs/esm/index.js";
-import relativeTime from "dayjs/plugin/relativeTime";
-import postContext from "../../context";
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-dayjs.extend(relativeTime);
-const Post = ({ ...post }) => {
-  const { currentUser, handlePostDelete } = useContext(postContext);
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+import {Box, Button, Menu, MenuItem, Typography} from '@mui/material'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import React, {useContext, useState} from 'react'
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
+import DeleteIcon from '@mui/icons-material/Delete'
+import dayjs from 'dayjs/esm/index.js'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import postContext from '../../context'
+dayjs.extend(relativeTime)
+const Post = ({...post}) => {
+  const {currentUser, handlePostDelete} = useContext(postContext)
+  const [anchorEl, setAnchorEl] = useState(null)
+  const open = Boolean(anchorEl)
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget)
+  }
   const handleClose = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
   const handleDelete = () => {
-    setAnchorEl(null);
-    handlePostDelete(post.id);
-  };
+    setAnchorEl(null)
+    handlePostDelete(post.id)
+  }
   return (
     <Box
       sx={{
-        p: "24px 20px",
-        border: "2px solid rgba(53, 55, 59, 1)",
-        mt: "16px",
-        backgroundColor: "rgba(39, 41, 45, 1)",
-        maxWidth: "700px",
-        borderRadius: "8px",
+        p: '24px 20px',
+        border: '2px solid rgba(53, 55, 59, 1)',
+        mt: '16px',
+        backgroundColor: 'rgba(39, 41, 45, 1)',
+        maxWidth: '700px',
+        borderRadius: '8px',
       }}
     >
       <Box
         sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
         }}
       >
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Box sx={{ fontSize: "55px", maxHeight: "55px", m: 0 }}>
+        <Box sx={{display: 'flex', alignItems: 'center'}}>
+          <Box sx={{fontSize: '55px', maxHeight: '55px', m: 0}}>
             <AccountCircleIcon fontSize="inherit" />
           </Box>
-          <Box sx={{ ml: "16px" }}>
+          <Box sx={{ml: '16px'}}>
             <Typography
               sx={{
-                fontSize: "16px",
-                lineHeight: "19px",
-                align: "left",
-                verticalLeft: "top",
-                color: "rgba(197, 199, 202, 1)",
+                fontSize: '16px',
+                lineHeight: '19px',
+                align: 'left',
+                verticalLeft: 'top',
+                color: 'rgba(197, 199, 202, 1)',
               }}
             >
               {post.name}
             </Typography>
             <Typography
               sx={{
-                mt: "4px",
-                color: "rgba(127, 128, 132, 1)",
-                FontSize: "14px",
-                LineHeight: "17px",
+                mt: '4px',
+                color: 'rgba(127, 128, 132, 1)',
+                FontSize: '14px',
+                LineHeight: '17px',
               }}
             >
               {dayjs?.(post?.time).fromNow()}
-              {post?.isEdited ? " • Edited" : null}
+              {post?.isEdited ? ' • Edited' : null}
             </Typography>
           </Box>
         </Box>
         <Box>
           <Button
             id="basic-button"
-            aria-controls={open ? "basic-menu" : undefined}
+            aria-controls={open ? 'basic-menu' : undefined}
             aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
+            aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}
           >
             <MoreHorizIcon
               sx={{
-                backgroundColor: "transparent",
-                color: "rgba(197, 199, 202, 1)",
+                backgroundColor: 'transparent',
+                color: 'rgba(197, 199, 202, 1)',
               }}
             />
           </Button>
@@ -90,14 +89,14 @@ const Post = ({ ...post }) => {
             open={open}
             onClose={handleClose}
             MenuListProps={{
-              "aria-labelledby": "basic-button",
+              'aria-labelledby': 'basic-button',
             }}
           >
             <MenuItem
               disabled={currentUser?.email !== post?.creator?.creatorEmail}
               onClick={handleDelete}
             >
-              <DeleteIcon sx={{ ml: "-8px", mr: "20px" }} />
+              <DeleteIcon sx={{ml: '-8px', mr: '20px'}} />
               Delete
             </MenuItem>
           </Menu>
@@ -105,26 +104,26 @@ const Post = ({ ...post }) => {
       </Box>
       <Box
         sx={{
-          padding: "15px 16px",
-          backgroundColor: "rgba(25, 25, 32, 1)",
-          maxWidth: "660px",
-          borderRadius: "8px",
-          marginTop: "18px",
-          display: "flex",
-          alignItems: "center",
+          padding: '15px 16px',
+          backgroundColor: 'rgba(25, 25, 32, 1)',
+          maxWidth: '660px',
+          borderRadius: '8px',
+          marginTop: '18px',
+          display: 'flex',
+          alignItems: 'center',
         }}
       >
         <Box>
           <Box
             sx={{
-              backgroundColor: "rgba(39, 41, 45, 1)",
-              width: "48px",
-              height: "48px",
-              borderRadius: "50%",
-              fontSize: "22px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              backgroundColor: 'rgba(39, 41, 45, 1)',
+              width: '48px',
+              height: '48px',
+              borderRadius: '50%',
+              fontSize: '22px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
             }}
           >
             {post.emoji}
@@ -132,17 +131,17 @@ const Post = ({ ...post }) => {
         </Box>
         <Typography
           sx={{
-            ml: "16px",
-            fontSize: "16px",
-            lineHeight: "24px",
-            color: "rgba(127, 128, 132, 1)",
+            ml: '16px',
+            fontSize: '16px',
+            lineHeight: '24px',
+            color: 'rgba(127, 128, 132, 1)',
           }}
         >
           {post.message}
         </Typography>
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default Post;
+export default Post
