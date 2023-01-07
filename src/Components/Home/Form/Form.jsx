@@ -77,7 +77,7 @@ const Form = ({setOpen}) => {
               <Box
                 sx={{
                   position: 'absolute',
-                  left: 0,
+                  left: {xs: '-35px', sm: 0},
                   zIndex: '1',
                 }}
               >
