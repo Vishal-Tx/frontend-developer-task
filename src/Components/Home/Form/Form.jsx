@@ -74,9 +74,14 @@ const Form = ({setOpen}) => {
               {emoji}
             </Button>
             {isVisible && (
-              <Box sx={{position: 'absolute', left: 0}}>
+              <Box
+                sx={{
+                  position: 'absolute',
+                  left: 0,
+                  zIndex: '1',
+                }}
+              >
                 <Picker
-                  style={{height: '200px'}}
                   data={data}
                   onEmojiSelect={data => {
                     setEmoji(data.native)
