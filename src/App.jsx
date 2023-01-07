@@ -23,7 +23,7 @@ const App = () => {
           <Route path="/" element={<Layout />}>
             <Route index element={<Navigate to="/posts" />} />
 
-            <Route path="/posts">
+            <Route path="posts">
               <Route index exact element={<Home />} />
             </Route>
 
