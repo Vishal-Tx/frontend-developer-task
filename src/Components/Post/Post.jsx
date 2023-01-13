@@ -93,7 +93,7 @@ const Post = ({...post}) => {
             }}
           >
             <MenuItem
-              disabled={currentUser?.email !== post?.creator?.creatorEmail}
+              disabled={!currentUser || currentUser?.email !== post?.creator?.creatorEmail}
               onClick={handleDelete}
             >
               <DeleteIcon sx={{ml: '-8px', mr: '20px'}} />
